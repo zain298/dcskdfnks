@@ -1,0 +1,149 @@
+<div class="_userProfile">
+  <div class="container p-0">
+    <div class="row">
+      <div class="col-md-12 p-0">
+        <div class="well">
+          <div class="updateProfile" style="z-index:17000000">
+            <button (click)="Edit()" style="z-index:17000000" class="btn btn-default text-dark"><i
+                class="fa fa-pencil"></i>
+              <span> Update</span></button>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="profilePic">
+                <a>
+                  <img src="http://i.imgur.com/2FOGwg9.png" class="img-responsive">
+                </a>
+                <div class="_updatePic">
+                  <div class="btn-upload">
+                    <span><i class="fa fa-camera"></i> Update Picture</span>
+                    <input type="file" accept="image/png, image/jpeg, image/gif" name="">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div  class="content-box pt-0 pr-0">
+                <div  class="row pt-0">
+                  <div  class="col-sm-12 pr-0">
+                    <div  class="element-wrapper">
+                      <div  class="element-content">
+                        <div  class="row">
+                          <div  class="col-lg-12">
+                            <div  class="panel-group">
+                              <div class="_usershortDetail">
+                                <h1 class="_username">{{ lookup.code }} - {{ lookup.description }}&nbsp;&nbsp; 
+                                  <b class="active" *ngIf="lookup.isactive == true">
+                                    <span class="fa fa-circle _completed" title="Active"></span> (Active)
+                                  </b> 
+                                  <b class="inactive" *ngIf="lookup.isactive == false">
+                                    <span class="fa fa-circle _notstarted" title="InActive"></span> (InActive)
+                                  </b>
+                                </h1>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container p-0">
+    <div class="row">
+      <div class="col-md-3 p-0">
+        <div class="side-bar">
+          <ul class="list-group p-0">
+            <li routerLinkActive="active" routerLink="DemoviewOne" 
+              class="pointer list-group-item d-flex justify-content-between align-items-center">
+              <a><i class="fa fa-phone fa-lg"></i>&nbsp; DemoviewOne</a>
+            </li>
+            <li routerLinkActive="active" routerLink="DemoviewTwo"
+              class="pointer list-group-item d-flex justify-content-between align-items-center">
+              <a><i class="fa fa-phone fa-lg"></i>&nbsp; DemoviewTwo</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-labelledby="exampleModalLabel" class="modal fade show" id="editModal" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Lookup
+        </h5>
+        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true"> ×</span>
+        </button>
+      </div>
+      <form action="" class="form" (ngSubmit)="f.form.valid && update(lookup)" #f="ngForm" novalidate>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">Entity Name <span style="color:red">*</span></label>
+                <ng-select [(ngModel)]="lookup.entityname" name="entity" required>
+                    <ng-option *ngFor="let entity of entitylist" [value]="entity">{{entity}}</ng-option>
+                </ng-select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group ">
+                <label class="control-label">Code <span style="color:red">*</span></label>
+                <input type="text" class="form-control" name="code" [(ngModel)]="lookup.code" maxlength="50" [ngClass]="{'is-invalid' : code.invalid }"  #code="ngModel" pattern="[a-zA-Z0-9\s]+" required>
+                <div style="color:red" *ngIf="code.invalid">Only alphanumeric and space is allowed!</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group ">
+                <label class="control-label">Entity Status</label>
+                <input type="text" class="form-control" name="status" [(ngModel)]="lookup.entity_STATUS" maxlength="50">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">Description <span style="color:red">*</span></label>
+                <textarea class="form-control" name="description" [(ngModel)]="lookup.description" rows=5 [ngClass]="{'is-invalid' : description.invalid }"  #description="ngModel" required></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <div class="checkbox">
+                  <label class="control-label">
+                    <input type="checkbox" [checked]="lookup.isactive" [(ngModel)]="lookup.isactive" name="isactive">
+                    Active
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" [disabled]="f.invalid">
+            <i class="fa fa-plus" aria-hidden="true"></i> Update
+          </button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

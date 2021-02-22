@@ -1,0 +1,60 @@
+::ng-deep #gridContainer .dx-datagrid-header-panel {
+   padding: 0;
+   background-color: rgba(222, 233, 247, 0.6);
+}
+
+::ng-deep #gridContainer .dx-datagrid-header-panel .dx-toolbar {
+   margin: 0;
+   padding-right: 20px;
+   background-color: transparent;
+}
+
+::ng-deep #gridContainer .dx-datagrid-header-panel .dx-toolbar-items-container {
+   height: 70px;
+}
+
+::ng-deep #gridContainer .dx-datagrid-header-panel .dx-toolbar-before .dx-toolbar-item:not(:first-child) {
+   background-color: rgba(222, 233, 247, 0.6);
+}
+
+::ng-deep #gridContainer .dx-datagrid-header-panel .dx-toolbar-before .dx-toolbar-item:last-child {
+   padding-right: 10px;
+}
+
+::ng-deep #gridContainer .dx-datagrid-header-panel .dx-selectbox {
+   margin: 17px 10px;
+}
+
+::ng-deep #gridContainer .dx-datagrid-header-panel .dx-button {
+   margin: 17px 0;
+}
+
+::ng-deep #gridContainer .informer {
+   height: 70px;
+   width: 130px;
+   text-align: center;
+   color: #fff;
+}
+
+::ng-deep #gridContainer .count {
+   padding-top: 15px;
+   line-height: 27px;
+   margin: 0;
+}
+
+::ng-deep #select-prefix {
+   width: 150px;
+   display: inline-block;
+   vertical-align: middle;
+}
+
+::ng-deep .selected-data {
+   margin-top: 20px;
+   padding: 20px;
+   background-color: rgba(191, 191, 191, 0.15);
+}
+
+::ng-deep .selected-data .caption {
+   font-weight: bold;
+   font-size: 115%;
+}
