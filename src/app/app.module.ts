@@ -69,6 +69,7 @@ import { RequestOptionsService } from './services/setting.headers';
 
 import { LookupComponent } from './lookup/lookup.component';
 import { DriverinformationComponent } from './driverinformation/driverinformation.component';
+import { ElectioninformationComponent } from './electioninformation/electioninformation.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { DriverinformationComponent } from './driverinformation/driverinformatio
     ButtonRendererComponent,
     ViewRendererComponent,
     DriverinformationComponent,
+    ElectioninformationComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,7 @@ import { DemoViewTwoComponent } from "./dashboard2/demo-view/demo-view-two/demo-
 
 import { LookupComponent } from "./lookup/lookup.component";
 import { DriverinformationComponent } from './driverinformation/driverinformation.component';
+import { ElectioninformationComponent } from './electioninformation/electioninformation.component';
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -23,6 +24,7 @@ const appRoutes: Routes = [
             { path: 'home', component: HomeComponent },
             { path: 'lookup', component: LookupComponent },
             { path: 'driverinformation', component: DriverinformationComponent },
+            { path: 'electioninformation', component: ElectioninformationComponent },
             { path: '**', component: NotFoundComponent }
         ], canActivate: [AuthGuardService]
     },
