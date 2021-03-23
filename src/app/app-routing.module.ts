@@ -13,6 +13,11 @@ import { DemoViewTwoComponent } from "./dashboard2/demo-view/demo-view-two/demo-
 import { LookupComponent } from "./lookup/lookup.component";
 import { DriverinformationComponent } from './driverinformation/driverinformation.component';
 import { ElectioninformationComponent } from './electioninformation/electioninformation.component';
+import { ElectionblockcodeinformationComponent } from './electionblockcodeinformation/electionblockcodeinformation.component';
+import { ElectioncontituencyinformationComponent } from './electioncontituencyinformation/electioncontituencyinformation.component';
+import { ElectioncontituencypollingstationinformationComponent } from './electioncontituencypollingstationinformation/electioncontituencypollingstationinformation.component';
+import { ElectioncontituencypollingstationdetailinformationComponent } from './electioncontituencypollingstationdetailinformation/electioncontituencypollingstationdetailinformation.component';
+import { ElectioncontituencypollingstationresultinformationComponent } from './electioncontituencypollingstationresultinformation/electioncontituencypollingstationresultinformation.component';
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -25,6 +30,11 @@ const appRoutes: Routes = [
             { path: 'lookup', component: LookupComponent },
             { path: 'driverinformation', component: DriverinformationComponent },
             { path: 'electioninformation', component: ElectioninformationComponent },
+            { path: 'electionblockcodeinformation', component: ElectionblockcodeinformationComponent },
+            { path: 'electioncontituencyinformation', component: ElectioncontituencyinformationComponent },
+            { path: 'electioncontituencypollingstationinformation', component: ElectioncontituencypollingstationinformationComponent },
+            { path: 'electioncontituencypollingstationdetailinformation', component: ElectioncontituencypollingstationdetailinformationComponent },
+            { path: 'electioncontituencypollingstationresultinformation', component: ElectioncontituencypollingstationresultinformationComponent },
             { path: '**', component: NotFoundComponent }
         ], canActivate: [AuthGuardService]
     },

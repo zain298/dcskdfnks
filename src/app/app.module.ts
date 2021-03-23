@@ -70,6 +70,12 @@ import { RequestOptionsService } from './services/setting.headers';
 import { LookupComponent } from './lookup/lookup.component';
 import { DriverinformationComponent } from './driverinformation/driverinformation.component';
 import { ElectioninformationComponent } from './electioninformation/electioninformation.component';
+import { ElectionblockcodeinformationComponent } from './electionblockcodeinformation/electionblockcodeinformation.component';
+import { ElectioncontituencyinformationComponent } from './electioncontituencyinformation/electioncontituencyinformation.component';
+import { ElectioncontituencypollingstationinformationComponent } from './electioncontituencypollingstationinformation/electioncontituencypollingstationinformation.component';
+import { ElectioncontituencypollingstationdetailinformationComponent } from './electioncontituencypollingstationdetailinformation/electioncontituencypollingstationdetailinformation.component';
+import { ElectioncontituencypollingstationresultinformationComponent } from './electioncontituencypollingstationresultinformation/electioncontituencypollingstationresultinformation.component';
+import { PoliticalpartyinformationComponent } from './politicalpartyinformation/politicalpartyinformation.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +97,13 @@ import { ElectioninformationComponent } from './electioninformation/electioninfo
     ViewRendererComponent,
     DriverinformationComponent,
     ElectioninformationComponent,
+    ElectionblockcodeinformationComponent,
+    ElectioncontituencyinformationComponent,
+    ElectioncontituencypollingstationinformationComponent,
+    ElectioncontituencypollingstationdetailinformationComponent,
+    ElectioncontituencypollingstationresultinformationComponent,
+    PoliticalpartyinformationComponent,
+   
   ],
   imports: [
     BrowserModule,
