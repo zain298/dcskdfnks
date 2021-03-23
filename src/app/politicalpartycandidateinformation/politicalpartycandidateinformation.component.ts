@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { OnFailService } from "../services/on-fail.service";
-import { PoliticalpartyinformationService } from "../politicalpartyinformation/politicalpartyinformation.service";
+import { PoliticalpartycandidateinformationService } from "../politicalpartycandidateinformation/politicalpartycandidateinformation.service";
 import { ToastrService } from 'ngx-toastr';
 import { LookupService } from "../lookup/lookup.service";
 
 declare var $: any;
 
 @Component({
-  selector: 'app-politicalpartyinformation',
-  templateUrl: './politicalpartyinformation.component.html',
-  styleUrls: ['./politicalpartyinformation.component.css']
+  selector: 'app-politicalpartycandidateinformation',
+  templateUrl: './politicalpartycandidateinformation.component.html',
+  styleUrls: ['./politicalpartycandidateinformation.component.css']
 })
-export class PoliticalpartyinformationComponent implements OnInit {
+export class PoliticalpartycandidateinformationComponent implements OnInit {
 
   entitylist=[];
-  politicalpartyinformationAll=[];
+  politicalpartycandidateinformationAll=[];
   drivertypeActive=[];
-  politicalpartyinformation={
+  politicalpartycandidateinformation={
     driver_ID: 0,
     title: '',
     surname: '',
@@ -28,7 +28,7 @@ export class PoliticalpartyinformationComponent implements OnInit {
   };
   orderno=[];
   constructor(
-    private politicalpartyinformationservice:PoliticalpartyinformationService,
+    private politicalpartycandidateinformationservice:PoliticalpartycandidateinformationService,
     private onfailservice: OnFailService,
     private toastrservice: ToastrService,
     private lookupservice: LookupService,
@@ -46,13 +46,13 @@ export class PoliticalpartyinformationComponent implements OnInit {
 
   // Frontend Actions 
 
-  View(politicalpartyinformation) {
-    const url = "view/demo/" + politicalpartyinformation.data.driver_ID  + "/DemoviewOne";
+  View(politicalpartycandidateinformation) {
+    const url = "view/demo/" + politicalpartycandidateinformation.data.driver_ID  + "/DemoviewOne";
     window.open(location.origin + location.pathname + "#/" + url);
   }
 
   AddNew() {
-    this.politicalpartyinformation={
+    this.politicalpartycandidateinformation={
       driver_ID: 0,
       title: '',
       surname: '',
@@ -70,7 +70,7 @@ export class PoliticalpartyinformationComponent implements OnInit {
   }
 
   Edit(row) {
-    this.politicalpartyinformation = {
+    this.politicalpartycandidateinformation = {
       driver_ID: row.data.driver_ID,
       title: row.data.title, 
       surname: row.data.surname,
@@ -80,9 +80,9 @@ export class PoliticalpartyinformationComponent implements OnInit {
       isactive: true
     };
     if (row.data.isactive == "Y") {
-      this.politicalpartyinformation.isactive = true;
+      this.politicalpartycandidateinformation.isactive = true;
     } else {
-      this.politicalpartyinformation.isactive = false;
+      this.politicalpartycandidateinformation.isactive = false;
     }
     this.getDriverType();
     $("#editModal").modal("show");
@@ -92,13 +92,13 @@ export class PoliticalpartyinformationComponent implements OnInit {
   // APIs Call Functions
 
   getAll() {
-    this.politicalpartyinformationservice.getAll().subscribe(response => {
+    this.politicalpartycandidateinformationservice.getAll().subscribe(response => {
       if(response) {
         console.log(response);
         if (response.error && response.status) {
           this.toastrservice.warning("Message", " " + response.message);
         } else {
-          this.politicalpartyinformationAll = response;
+          this.politicalpartycandidateinformationAll = response;
         }
       }
     }, error => {
@@ -106,13 +106,13 @@ export class PoliticalpartyinformationComponent implements OnInit {
     })
   }
   
-  add(politicalpartyinformation) {
-    if (politicalpartyinformation.drivertype_ID!=null) {
-      politicalpartyinformation.drivertype_ID = politicalpartyinformation.drivertype_ID.id;
+  add(politicalpartycandidateinformation) {
+    if (politicalpartycandidateinformation.drivertype_ID!=null) {
+      politicalpartycandidateinformation.drivertype_ID = politicalpartycandidateinformation.drivertype_ID.id;
     } else {
-      politicalpartyinformation.drivertype_ID== null;
+      politicalpartycandidateinformation.drivertype_ID== null;
     }
-    this.politicalpartyinformationservice.add(politicalpartyinformation).subscribe(response => {
+    this.politicalpartycandidateinformationservice.add(politicalpartycandidateinformation).subscribe(response => {
       if(response) {
         console.log(response);
 
@@ -120,7 +120,7 @@ export class PoliticalpartyinformationComponent implements OnInit {
           this.toastrservice.warning("Message", " " + response.message);
         } else if (response.driver_ID) {
           this.toastrservice.success("Success", "New Driver Information Added");
-          this.politicalpartyinformation = response;
+          this.politicalpartycandidateinformation = response;
           this.getAll();
 
           $("#addModal").modal("hide");
@@ -133,24 +133,24 @@ export class PoliticalpartyinformationComponent implements OnInit {
     })
   }
 
-  update(politicalpartyinformation) {
-    if (politicalpartyinformation.isactive == true) {
-      politicalpartyinformation.isactive = 'Y';
+  update(politicalpartycandidateinformation) {
+    if (politicalpartycandidateinformation.isactive == true) {
+      politicalpartycandidateinformation.isactive = 'Y';
     } else {
-      politicalpartyinformation.isactive = 'N';
+      politicalpartycandidateinformation.isactive = 'N';
     }
-    if (politicalpartyinformation.drivertype_ID!=null) {
-      politicalpartyinformation.drivertype_ID = politicalpartyinformation.drivertype_ID.id;
+    if (politicalpartycandidateinformation.drivertype_ID!=null) {
+      politicalpartycandidateinformation.drivertype_ID = politicalpartycandidateinformation.drivertype_ID.id;
     } else {
-      politicalpartyinformation.drivertype_ID== null;
+      politicalpartycandidateinformation.drivertype_ID== null;
     }
-    this.politicalpartyinformationservice.update(politicalpartyinformation, politicalpartyinformation.driver_ID).subscribe(response => {
+    this.politicalpartycandidateinformationservice.update(politicalpartycandidateinformation, politicalpartycandidateinformation.driver_ID).subscribe(response => {
       if(response) {
         if (response.error && response.status) {
           this.toastrservice.warning("Message", " " + response.message);
         } else if (response.driver_ID) {
           this.toastrservice.success("Success", "Driver Information Updated");
-          this.politicalpartyinformation = response;
+          this.politicalpartycandidateinformation = response;
           this.getAll();
           $("#editModal").modal("hide");
         } else {

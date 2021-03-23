@@ -18,6 +18,10 @@ import { ElectioncontituencyinformationComponent } from './electioncontituencyin
 import { ElectioncontituencypollingstationinformationComponent } from './electioncontituencypollingstationinformation/electioncontituencypollingstationinformation.component';
 import { ElectioncontituencypollingstationdetailinformationComponent } from './electioncontituencypollingstationdetailinformation/electioncontituencypollingstationdetailinformation.component';
 import { ElectioncontituencypollingstationresultinformationComponent } from './electioncontituencypollingstationresultinformation/electioncontituencypollingstationresultinformation.component';
+import { PoliticalpartyinformationComponent } from './politicalpartyinformation/politicalpartyinformation.component';
+import { PoliticalpartycandidateinformationComponent } from './politicalpartycandidateinformation/politicalpartycandidateinformation.component';
+import { PersoninformationComponent } from './personinformation/personinformation.component';
+import { DistrictinformationComponent } from './Districtinformation/Districtinformation.component';
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -35,6 +39,11 @@ const appRoutes: Routes = [
             { path: 'electioncontituencypollingstationinformation', component: ElectioncontituencypollingstationinformationComponent },
             { path: 'electioncontituencypollingstationdetailinformation', component: ElectioncontituencypollingstationdetailinformationComponent },
             { path: 'electioncontituencypollingstationresultinformation', component: ElectioncontituencypollingstationresultinformationComponent },
+            { path: 'politicalpartyinformation', component: PoliticalpartyinformationComponent },
+            { path: 'politicalpartycandidateinformation', component: PoliticalpartycandidateinformationComponent },
+            { path: 'personinformation', component: PersoninformationComponent },
+         //   { path: 'districtinformation', component: DistrictinformationComponent },
+
             { path: '**', component: NotFoundComponent }
         ], canActivate: [AuthGuardService]
     },

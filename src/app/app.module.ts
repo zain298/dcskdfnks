@@ -76,6 +76,9 @@ import { ElectioncontituencypollingstationinformationComponent } from './electio
 import { ElectioncontituencypollingstationdetailinformationComponent } from './electioncontituencypollingstationdetailinformation/electioncontituencypollingstationdetailinformation.component';
 import { ElectioncontituencypollingstationresultinformationComponent } from './electioncontituencypollingstationresultinformation/electioncontituencypollingstationresultinformation.component';
 import { PoliticalpartyinformationComponent } from './politicalpartyinformation/politicalpartyinformation.component';
+import { PoliticalpartycandidateinformationComponent } from './politicalpartycandidateinformation/politicalpartycandidateinformation.component';
+import { PersoninformationComponent } from './personinformation/personinformation.component';
+import { DistrictinformationComponent } from './districtinformation/districtinformation.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +106,9 @@ import { PoliticalpartyinformationComponent } from './politicalpartyinformation/
     ElectioncontituencypollingstationdetailinformationComponent,
     ElectioncontituencypollingstationresultinformationComponent,
     PoliticalpartyinformationComponent,
+    PoliticalpartycandidateinformationComponent,
+    PersoninformationComponent,
+    DistrictinformationComponent,
    
   ],
   imports: [

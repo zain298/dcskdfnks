@@ -4,7 +4,7 @@ import { HttpCallServieService } from "../services/http-call-servie.service";
 @Injectable({
   providedIn: 'root'
 })
-export class PoliticalpartyinformationService {
+export class DistrictinformationService {
 
   constructor(   
      private _HttpCallServieService_: HttpCallServieService

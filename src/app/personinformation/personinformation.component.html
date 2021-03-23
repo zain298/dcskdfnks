@@ -18,7 +18,7 @@
                       <div class="outer-div">
                         <div class="grid-wrapper">
                           <dx-data-grid id="drivergridContainer"
-                            [dataSource]="politicalpartyinformationAll"
+                            [dataSource]="personinformationAll"
                             keyExpr="driver_ID"
                             [showColumnLines]="true"
                             [showRowLines]="true"
@@ -120,13 +120,13 @@
           <span aria-hidden="true"> ×</span>
         </button>
       </div>
-      <form action="" class="form" (ngSubmit)="f.form.valid && add(politicalpartyinformation)" #f="ngForm" novalidate>
+      <form action="" class="form" (ngSubmit)="f.form.valid && add(personinformation)" #f="ngForm" novalidate>
         <div class="modal-body">
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
                 <label class="control-label">Driver Title </label>
-                <input type="text" class="form-control" name="title" [(ngModel)]="politicalpartyinformation.title" maxlength="50" >
+                <input type="text" class="form-control" name="title" [(ngModel)]="personinformation.title" maxlength="50" >
               </div>
             </div>
           </div>
@@ -134,13 +134,13 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="control-label">Driver Surname <span style="color:red">*</span></label>
-                <input type="text" class="form-control" name="surname" [(ngModel)]="politicalpartyinformation.surname" maxlength="50" [ngClass]="{'is-invalid' : code.invalid }"  #code="ngModel" pattern="[a-zA-Z0-9\s]+" required>
+                <input type="text" class="form-control" name="surname" [(ngModel)]="personinformation.surname" maxlength="50" [ngClass]="{'is-invalid' : code.invalid }"  #code="ngModel" pattern="[a-zA-Z0-9\s]+" required>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group ">
                 <label class="control-label">Driver Forename<span style="color:red">*</span></label>
-                <input type="text" class="form-control" name="forenames" [(ngModel)]="politicalpartyinformation.forenames" maxlength="50" [ngClass]="{'is-invalid' : code.invalid }"  #code="ngModel" pattern="[a-zA-Z0-9\s]+" required>
+                <input type="text" class="form-control" name="forenames" [(ngModel)]="personinformation.forenames" maxlength="50" [ngClass]="{'is-invalid' : code.invalid }"  #code="ngModel" pattern="[a-zA-Z0-9\s]+" required>
               </div>
             </div>   
           </div>
@@ -149,7 +149,7 @@
           <div class="col-md-12">
             <div class="form-group ">
               <label class="control-label"> Driver Type </label>
-              <ng-select [(ngModel)]="politicalpartyinformation.drivertype_ID" name="drivertype_ID">
+              <ng-select [(ngModel)]="personinformation.drivertype_ID" name="drivertype_ID">
                 <ng-option *ngFor="let drivertype of drivertypeActive" [value]="drivertype.id">{{drivertype.description}}</ng-option>
             </ng-select>
             </div>
@@ -159,7 +159,7 @@
             <div class="col-md-12">
               <div class="form-group ">
                 <label class="control-label">Drivering Path</label>
-                <input type="text" class="form-control" name="drivering_PATH" [(ngModel)]="politicalpartyinformation.drivering_PATH" maxlength="50"  >
+                <input type="text" class="form-control" name="drivering_PATH" [(ngModel)]="personinformation.drivering_PATH" maxlength="50"  >
               </div>
             </div>
           </div>
@@ -187,13 +187,13 @@
           <span aria-hidden="true"> ×</span>
         </button>
       </div>
-      <form action="" class="form" (ngSubmit)="f.form.valid && update(politicalpartyinformation)" #f="ngForm" novalidate>
+      <form action="" class="form" (ngSubmit)="f.form.valid && update(personinformation)" #f="ngForm" novalidate>
         <div class="modal-body">
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
                 <label class="control-label">Driver Title </label>
-                <input type="text" class="form-control" name="title" [(ngModel)]="politicalpartyinformation.title" maxlength="50" >
+                <input type="text" class="form-control" name="title" [(ngModel)]="personinformation.title" maxlength="50" >
               </div>
             </div>
           </div>
@@ -201,13 +201,13 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="control-label">Driver Surname <span style="color:red">*</span></label>
-                <input type="text" class="form-control" name="surname" [(ngModel)]="politicalpartyinformation.surname" maxlength="50" [ngClass]="{'is-invalid' : code.invalid }"  #code="ngModel" pattern="[a-zA-Z0-9\s]+" required>
+                <input type="text" class="form-control" name="surname" [(ngModel)]="personinformation.surname" maxlength="50" [ngClass]="{'is-invalid' : code.invalid }"  #code="ngModel" pattern="[a-zA-Z0-9\s]+" required>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group ">
                 <label class="control-label">Driver Forename<span style="color:red">*</span></label>
-                <input type="text" class="form-control" name="forenames" [(ngModel)]="politicalpartyinformation.forenames" maxlength="50" [ngClass]="{'is-invalid' : code.invalid }"  #code="ngModel" pattern="[a-zA-Z0-9\s]+" required>
+                <input type="text" class="form-control" name="forenames" [(ngModel)]="personinformation.forenames" maxlength="50" [ngClass]="{'is-invalid' : code.invalid }"  #code="ngModel" pattern="[a-zA-Z0-9\s]+" required>
               </div>
             </div>   
           </div>
@@ -216,7 +216,7 @@
           <div class="col-md-12">
             <div class="form-group ">
               <label class="control-label"> Driver Type </label>
-              <ng-select [(ngModel)]="politicalpartyinformation.drivertype_ID" name="drivertype_ID">
+              <ng-select [(ngModel)]="personinformation.drivertype_ID" name="drivertype_ID">
                 <ng-option *ngFor="let drivertype of drivertypeActive" [value]="drivertype.id">{{drivertype.description}}</ng-option>
             </ng-select>
 
@@ -227,7 +227,7 @@
             <div class="col-md-12">
               <div class="form-group ">
                 <label class="control-label">Drivering Path</label>
-                <input type="text" class="form-control" name="drivering_PATH" [(ngModel)]="politicalpartyinformation.drivering_PATH" maxlength="50"  >
+                <input type="text" class="form-control" name="drivering_PATH" [(ngModel)]="personinformation.drivering_PATH" maxlength="50"  >
               </div>
             </div>
           </div>
@@ -236,7 +236,7 @@
               <div class="form-group">
                 <div class="checkbox">
                   <label class="control-label">
-                    <input type="checkbox" [checked]="politicalpartyinformation.isactive" [(ngModel)]="politicalpartyinformation.isactive" name="isactive">
+                    <input type="checkbox" [checked]="personinformation.isactive" [(ngModel)]="personinformation.isactive" name="isactive">
                     Active
                   </label>
                 </div>

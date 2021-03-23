@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { OnFailService } from "../services/on-fail.service";
-import { PoliticalpartyinformationService } from "../politicalpartyinformation/politicalpartyinformation.service";
+import { PersoninformationService } from "../personinformation/personinformation.service";
 import { ToastrService } from 'ngx-toastr';
 import { LookupService } from "../lookup/lookup.service";
 
 declare var $: any;
 
 @Component({
-  selector: 'app-politicalpartyinformation',
-  templateUrl: './politicalpartyinformation.component.html',
-  styleUrls: ['./politicalpartyinformation.component.css']
+  selector: 'app-personinformation',
+  templateUrl: './personinformation.component.html',
+  styleUrls: ['./personinformation.component.css']
 })
-export class PoliticalpartyinformationComponent implements OnInit {
+export class PersoninformationComponent implements OnInit {
 
   entitylist=[];
-  politicalpartyinformationAll=[];
+  personinformationAll=[];
   drivertypeActive=[];
-  politicalpartyinformation={
+  personinformation={
     driver_ID: 0,
     title: '',
     surname: '',
@@ -28,7 +28,7 @@ export class PoliticalpartyinformationComponent implements OnInit {
   };
   orderno=[];
   constructor(
-    private politicalpartyinformationservice:PoliticalpartyinformationService,
+    private personinformationservice:PersoninformationService,
     private onfailservice: OnFailService,
     private toastrservice: ToastrService,
     private lookupservice: LookupService,
@@ -46,13 +46,13 @@ export class PoliticalpartyinformationComponent implements OnInit {
 
   // Frontend Actions 
 
-  View(politicalpartyinformation) {
-    const url = "view/demo/" + politicalpartyinformation.data.driver_ID  + "/DemoviewOne";
+  View(personinformation) {
+    const url = "view/demo/" + personinformation.data.driver_ID  + "/DemoviewOne";
     window.open(location.origin + location.pathname + "#/" + url);
   }
 
   AddNew() {
-    this.politicalpartyinformation={
+    this.personinformation={
       driver_ID: 0,
       title: '',
       surname: '',
@@ -70,7 +70,7 @@ export class PoliticalpartyinformationComponent implements OnInit {
   }
 
   Edit(row) {
-    this.politicalpartyinformation = {
+    this.personinformation = {
       driver_ID: row.data.driver_ID,
       title: row.data.title, 
       surname: row.data.surname,
@@ -80,9 +80,9 @@ export class PoliticalpartyinformationComponent implements OnInit {
       isactive: true
     };
     if (row.data.isactive == "Y") {
-      this.politicalpartyinformation.isactive = true;
+      this.personinformation.isactive = true;
     } else {
-      this.politicalpartyinformation.isactive = false;
+      this.personinformation.isactive = false;
     }
     this.getDriverType();
     $("#editModal").modal("show");
@@ -92,13 +92,13 @@ export class PoliticalpartyinformationComponent implements OnInit {
   // APIs Call Functions
 
   getAll() {
-    this.politicalpartyinformationservice.getAll().subscribe(response => {
+    this.personinformationservice.getAll().subscribe(response => {
       if(response) {
         console.log(response);
         if (response.error && response.status) {
           this.toastrservice.warning("Message", " " + response.message);
         } else {
-          this.politicalpartyinformationAll = response;
+          this.personinformationAll = response;
         }
       }
     }, error => {
@@ -106,13 +106,13 @@ export class PoliticalpartyinformationComponent implements OnInit {
     })
   }
   
-  add(politicalpartyinformation) {
-    if (politicalpartyinformation.drivertype_ID!=null) {
-      politicalpartyinformation.drivertype_ID = politicalpartyinformation.drivertype_ID.id;
+  add(personinformation) {
+    if (personinformation.drivertype_ID!=null) {
+      personinformation.drivertype_ID = personinformation.drivertype_ID.id;
     } else {
-      politicalpartyinformation.drivertype_ID== null;
+      personinformation.drivertype_ID== null;
     }
-    this.politicalpartyinformationservice.add(politicalpartyinformation).subscribe(response => {
+    this.personinformationservice.add(personinformation).subscribe(response => {
       if(response) {
         console.log(response);
 
@@ -120,7 +120,7 @@ export class PoliticalpartyinformationComponent implements OnInit {
           this.toastrservice.warning("Message", " " + response.message);
         } else if (response.driver_ID) {
           this.toastrservice.success("Success", "New Driver Information Added");
-          this.politicalpartyinformation = response;
+          this.personinformation = response;
           this.getAll();
 
           $("#addModal").modal("hide");
@@ -133,24 +133,24 @@ export class PoliticalpartyinformationComponent implements OnInit {
     })
   }
 
-  update(politicalpartyinformation) {
-    if (politicalpartyinformation.isactive == true) {
-      politicalpartyinformation.isactive = 'Y';
+  update(personinformation) {
+    if (personinformation.isactive == true) {
+      personinformation.isactive = 'Y';
     } else {
-      politicalpartyinformation.isactive = 'N';
+      personinformation.isactive = 'N';
     }
-    if (politicalpartyinformation.drivertype_ID!=null) {
-      politicalpartyinformation.drivertype_ID = politicalpartyinformation.drivertype_ID.id;
+    if (personinformation.drivertype_ID!=null) {
+      personinformation.drivertype_ID = personinformation.drivertype_ID.id;
     } else {
-      politicalpartyinformation.drivertype_ID== null;
+      personinformation.drivertype_ID== null;
     }
-    this.politicalpartyinformationservice.update(politicalpartyinformation, politicalpartyinformation.driver_ID).subscribe(response => {
+    this.personinformationservice.update(personinformation, personinformation.driver_ID).subscribe(response => {
       if(response) {
         if (response.error && response.status) {
           this.toastrservice.warning("Message", " " + response.message);
         } else if (response.driver_ID) {
           this.toastrservice.success("Success", "Driver Information Updated");
-          this.politicalpartyinformation = response;
+          this.personinformation = response;
           this.getAll();
           $("#editModal").modal("hide");
         } else {
