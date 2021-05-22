@@ -24,12 +24,12 @@ export class HttpCallServieService {
     ).pipe(map(res => res.json()));  
   }
 
-  apilogistics(postData){
-    var baselogisticsurl = this.BaseUrl.replace("SGW", "LOGISTICS");
-    return this.http.post(
-      baselogisticsurl + "orderraw/upload", postData
-    ).pipe(map(res => res.json()));  
-  }
+  // apilogistics(postData){
+  //   var baselogisticsurl = this.BaseUrl.replace("SGW", "LOGISTICS");
+  //   return this.http.post(
+  //     baselogisticsurl + "orderraw/upload", postData
+  //   ).pipe(map(res => res.json()));  
+  // }
 
 }
 

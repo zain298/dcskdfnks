@@ -9,20 +9,20 @@ declare var $: any;
 @Component({
   selector: 'app-electioninformation',
   templateUrl: './electioninformation.component.html',
-  styleUrls: ['./electioninformation.component.css']
+  styleUrls: ['./electioninformation.component.css'],
+  // providers:[ElectioninformationService]
 })
 export class ElectioninformationComponent implements OnInit {
 
+  value: Date = new Date(1981, 3, 27);
+  now: Date = new Date();
   entitylist=[];
   electioninformationAll=[];
   electiontypeActive=[];
   electioninformation={
     election_ID: 0,
-    title: '',
-    surname: '',
-    forenames: '',
-    electiontype_ID: {},
-    electioning_PATH: '',
+    election_DATE:'',
+      election_TYPE:0,
     isactive: true
 
   };
@@ -34,7 +34,9 @@ export class ElectioninformationComponent implements OnInit {
     private lookupservice: LookupService,
 
   ) { }
-
+  get diffInDay() {
+    return Math.floor(Math.abs(((new Date()).getTime() - this.value.getTime())/(24*60*60*1000))) + " days";
+}
   ngOnInit() {
     this.getAll();
 
@@ -52,33 +54,54 @@ export class ElectioninformationComponent implements OnInit {
   }
 
   AddNew() {
+    this.getElectionType();
     this.electioninformation={
+      
       election_ID: 0,
-      title: '',
-      surname: '',
-     forenames: '',
-     electiontype_ID: {},
-     electioning_PATH: '',
+      // title: '',
+      // surname: '',
+      election_DATE:'',
+      election_TYPE:0,
      isactive: true
     };
-    this.getElectionType();
+    console.log(this.electiontypeActive)
+    // this.getElectionType();
     $("#addModal").modal("show");
   }
 
   uploadorder(){
     $("#addModal").modal("show");
   }
-
+  Delete(row){
+        
+    this.electioninformationservice.delete(row.data.election_ID).subscribe(response => {
+      if(response) {
+        if (response.error && response.status) {
+          this.toastrservice.warning("Message", " " + response.message);
+        } else if (response.election_ID) {
+          this.toastrservice.success("Success", "Election Information Updated");
+          this.electioninformation = response;
+          this.getAll();
+          $("#editModal").modal("hide");
+        } else {
+          this.toastrservice.error("Some thing went wrong");
+        }
+      }
+    }, error => {
+      this.onfailservice.onFail(error);
+    })
+  }
   Edit(row) {
+    console.log(row)
     this.electioninformation = {
       election_ID: row.data.election_ID,
-      title: row.data.title, 
-      surname: row.data.surname,
-      forenames: row.data.forenames,
-      electiontype_ID: row.data.electiontype_ID!=null?row.data.electiontype_ID.id:null,
-      electioning_PATH: row.data.electioning_PATH,
+      // title: row.data.title, 
+      // surname: row.data.surname,
+      election_DATE:row.data.election_DATE,
+      election_TYPE:row.data.election_TYPE.description,
       isactive: true
     };
+
     if (row.data.isactive == "Y") {
       this.electioninformation.isactive = true;
     } else {
@@ -86,6 +109,7 @@ export class ElectioninformationComponent implements OnInit {
     }
     this.getElectionType();
     $("#editModal").modal("show");
+
   }
 
 
@@ -107,11 +131,8 @@ export class ElectioninformationComponent implements OnInit {
   }
   
   add(electioninformation) {
-    if (electioninformation.electiontype_ID!=null) {
-      electioninformation.electiontype_ID = electioninformation.electiontype_ID.id;
-    } else {
-      electioninformation.electiontype_ID== null;
-    }
+electioninformation.election_TYPE=2;
+// console.log(electioninformation.election_TYPE)
     this.electioninformationservice.add(electioninformation).subscribe(response => {
       if(response) {
         console.log(response);
@@ -139,11 +160,7 @@ export class ElectioninformationComponent implements OnInit {
     } else {
       electioninformation.isactive = 'N';
     }
-    if (electioninformation.electiontype_ID!=null) {
-      electioninformation.electiontype_ID = electioninformation.electiontype_ID.id;
-    } else {
-      electioninformation.electiontype_ID== null;
-    }
+    electioninformation.election_TYPE=2
     this.electioninformationservice.update(electioninformation, electioninformation.election_ID).subscribe(response => {
       if(response) {
         if (response.error && response.status) {
@@ -163,17 +180,19 @@ export class ElectioninformationComponent implements OnInit {
   }
 
   getElectionType() {
-    this.lookupservice.lookup("DRIVERTYPE").subscribe(response => {
-      if(response) {
-        if (response.error && response.status) {
-          this.toastrservice.warning("Message", " " + response.message);
-        } else {
-          this.electiontypeActive = response;
-        }
-      }
-    }, error => {
-      this.onfailservice.onFail(error);
-    })
+    // this.lookupservice.lookup("election_TYPE").subscribe(response => {
+    //   if(response) {
+    //     if (response.error && response.status) {
+    //       this.toastrservice.warning("Message", " " + response.message);
+    //     } else {
+          this.electiontypeActive = [
+            "GENERAL"
+          ];
+    //     }
+    //   }
+    // }, error => {
+    //   this.onfailservice.onFail(error);
+    // })
   }
 
 }

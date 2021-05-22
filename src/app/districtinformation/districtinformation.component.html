@@ -1,0 +1,359 @@
+<div class="row pt-4 tableScroll">
+  <div class="col-sm-12">
+    <div class="element-wrapper">
+      <div class="element-content">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel-group">
+              <div class="pipeline white lined-primary">
+                <div class="pipeline-header">
+                  <span class="pipeline-name"
+                    ><b
+                      ><i class="fa fa-columns faw"></i> District Information
+                    </b></span
+                  >
+                  <button
+                    class="
+                      btn btn-default btn-white btn-rounded btn-lg
+                      float-right
+                    "
+                    (click)="AddNew()"
+                  >
+                    <i class="fa fa-plus faw" aria-hidden="true"></i> Add New
+                  </button>
+                </div>
+                <div class="pipeline-body">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="outer-div">
+                        <div class="grid-wrapper">
+                          <dx-data-grid
+                            id="electiongridContainer"
+                            [dataSource]="districtinformationAll"
+                            keyExpr="district_ID"
+                            [showColumnLines]="true"
+                            [showRowLines]="true"
+                            [showBorders]="true"
+                            [rowAlternationEnabled]="true"
+                            [allowColumnResizing]="true"
+                            [columnMinWidth]="30"
+                            [columnAutoWidth]="true"
+                            [remoteOperations]="true"
+                            height="600"
+                            width="100%"
+                          >
+                            <dxo-filter-row [visible]="true"></dxo-filter-row>
+                            <dxo-header-filter
+                              [visible]="true"
+                            ></dxo-header-filter>
+                            <dxo-search-panel
+                              [visible]="true"
+                            ></dxo-search-panel>
+                            <!-- <dxo-paging [pageSize]="8"></dxo-paging>
+                          <dxo-group-panel [visible]="true"></dxo-group-panel> 
+                          <dxo-grouping [autoExpandAll]="false"></dxo-grouping> -->
+                            <dxo-scrolling mode="virtual"></dxo-scrolling>
+                            <dxo-sorting mode="multiple"></dxo-sorting>
+                            <dxo-selection mode="single"></dxo-selection>
+                            <dxi-column
+                              [width]="75"
+                              [allowFiltering]="false"
+                              [allowSorting]="false"
+                              alignment="center"
+                              cellTemplate="cellTemplate"
+                            >
+                            </dxi-column>
+                            <dxi-column
+                              [width]="75"
+                              [allowFiltering]="false"
+                              [allowSorting]="false"
+                              alignment="center"
+                              cellTemplate="delTemplate"
+                            >
+                            </dxi-column>
+                            <dxi-column
+                              [width]="100"
+                              dataField="district_CODE"
+                              caption="District Code"
+                              alignment="center"
+                              cssClass="myClass"
+                              sortOrder="asc"
+                            >
+                            </dxi-column>
+                            <dxi-column
+                              [width]="400"
+                              dataField="district_NAME"
+                              caption="District Name"
+                              cssClass="myClass"
+                            >
+                            </dxi-column>
+                            <dxi-column
+                              [width]="300"
+                              dataField="provinces_ID.description"
+                              caption="Province"
+                              cssClass="myClass"
+                            ></dxi-column>
+
+                            <dxi-column
+                              [width]="100"
+                              dataField="isactive"
+                              caption="Active"
+                              cssClass="myClass"
+                              alignment="center"
+                            ></dxi-column>
+                            <div *dxTemplate="let data of 'cellTemplate'">
+                              <button
+                                class="
+                                  btn btn-default btn-white btn-rounded btn-sm
+                                "
+                                (click)="Edit(data)"
+                              >
+                                <i
+                                  class="fa fa-pencil-square-o"
+                                  aria-hidden="true"
+                                ></i>
+                              </button>
+                            </div>
+                            <div *dxTemplate="let data of 'delTemplate'">
+                              <button
+                                class="
+                                  btn btn-default btn-white btn-rounded btn-sm
+                                "
+                                (click)="Delete(data)"
+                              >
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                              </button>
+                            </div>
+                            <dxo-scrolling
+                              columnRenderingMode="virtual"
+                            ></dxo-scrolling> </dx-data-grid
+                          ><br />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  aria-labelledby="exampleModalLabel"
+  class="modal fade show"
+  id="addModal"
+  role="dialog"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <i class="fa fa-plus" aria-hidden="true"></i> Add New election
+          Information
+        </h5>
+        <button
+          aria-label="Close"
+          class="close"
+          data-dismiss="modal"
+          type="button"
+        >
+          <span aria-hidden="true"> ×</span>
+        </button>
+      </div>
+      <form
+        action=""
+        class="form"
+        (ngSubmit)="f.form.valid && add(districtinformation)"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">District Code</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="title"
+                  [(ngModel)]="districtinformation.district_CODE"
+                  maxlength="50"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"
+                  >District Name<span style="color: red">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  name="surname"
+                  [(ngModel)]="districtinformation.district_NAME"
+                  maxlength="50"
+                  [ngClass]="{ 'is-invalid': code.invalid }"
+                  #code="ngModel"
+                  pattern="[a-zA-Z0-9\s]+"
+                  required
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"
+                  >Province<span style="color: red">*</span></label
+                >
+                <!-- <input
+                type="text"
+                class="form-control"
+                name="forenames"
+                [(ngModel)]="districtinformation.province"
+                maxlength="50"
+                [ngClass]="{ 'is-invalid': code.invalid }"
+                #code="ngModel"
+                pattern="[a-zA-Z0-9\s]+"
+                required
+              /> -->
+                <ng-select
+                  [(ngModel)]="districtinformation.description"
+                  name="Province Name"
+                  ng-init="districtinformation.description"
+                >
+                  <ng-option
+                    *ngFor="let province of provincetypeActive"
+                    [value]="province.description"
+                    >{{ province.description }}</ng-option
+                  >
+                </ng-select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" [disabled]="f.invalid">
+            <i class="fa fa-plus" aria-hidden="true"></i> Add
+          </button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div
+  aria-labelledby="exampleModalLabel"
+  class="modal fade show"
+  id="editModal"
+  role="dialog"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit District
+          Information
+        </h5>
+        <button
+          aria-label="Close"
+          class="close"
+          data-dismiss="modal"
+          type="button"
+        >
+          <span aria-hidden="true"> ×</span>
+        </button>
+      </div>
+      <form
+        action=""
+        class="form"
+        (ngSubmit)="f.form.valid && update(districtinformation)"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">District Code</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="title"
+                  [(ngModel)]="districtinformation.district_CODE"
+                  maxlength="50"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"
+                  >District Name<span style="color: red">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  name="surname"
+                  [(ngModel)]="districtinformation.district_NAME"
+                  maxlength="50"
+                  [ngClass]="{ 'is-invalid': code.invalid }"
+                  #code="ngModel"
+                  pattern="[a-zA-Z0-9\s]+"
+                  required
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"
+                  >Province<span style="color: red">*</span></label
+                >
+                <!-- <input
+                  type="text"
+                  class="form-control"
+                  name="forenames"
+                  [(ngModel)]="districtinformation.province"
+                  maxlength="50"
+                  [ngClass]="{ 'is-invalid': code.invalid }"
+                  #code="ngModel"
+                  pattern="[a-zA-Z0-9\s]+"
+                  required
+                /> -->
+                <ng-select
+                  [(ngModel)]="districtinformation.description"
+                  name="Province Name"
+                  ng-init="districtinformation.description"
+                >
+                  <ng-option
+                    *ngFor="let province of provincetypeActive"
+                    [value]="province.description"
+                    >{{ province.description }}</ng-option
+                  >
+                </ng-select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" [disabled]="f.invalid">
+            <i class="fa fa-plus" aria-hidden="true"></i> Update
+          </button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

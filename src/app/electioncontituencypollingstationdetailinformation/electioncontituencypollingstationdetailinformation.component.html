@@ -8,7 +8,7 @@
               <div class="pipeline white lined-primary">
                 <div class="pipeline-header">
                   <span class="pipeline-name"><b><i class="fa fa-columns faw"></i>
-                      Election Information </b></span>
+                    Election Contituency Polling Station Detailed Information </b></span>
                   <button class="btn btn-default btn-white btn-rounded btn-lg float-right" (click)="AddNew()"><i
                       class="fa fa-plus faw" aria-hidden="true"></i> Add New</button>
                 </div>
@@ -18,8 +18,8 @@
                       <div class="outer-div">
                         <div class="grid-wrapper">
                           <dx-data-grid id="electiongridContainer"
-                            [dataSource]="electioninformationAll"
-                            keyExpr="election_ID"
+                            [dataSource]="electioncontituencypollingstationdetailinformationAll"
+                            keyExpr="pollingsattiondetail_ID"
                             [showColumnLines]="true"
                             [showRowLines]="true"
                             [showBorders]="true"
@@ -40,76 +40,66 @@
                           <dxo-scrolling mode="virtual"></dxo-scrolling>
                           <dxo-sorting mode="multiple"></dxo-sorting>
                           <dxo-selection mode="single"></dxo-selection>
-                         
-                          <!-- <dxi-column 
-                            [width]="100"
-                            dataField="title"
-                            caption="Title"
+                          <dxi-column 
+                            [width]="75" 
+                            [allowFiltering]="false"
+                            [allowSorting]="false" 
+                            alignment="center"
+                            cellTemplate="cellTemplate">
+                          </dxi-column>
+                          <dxi-column 
+                            [width]="75" 
+                            [allowFiltering]="false"
+                            [allowSorting]="false" 
+                            alignment="center"
+                            cellTemplate="delTemplate">
+                          </dxi-column>
+                          <dxi-column 
+                            [width]="400"
+                            dataField="pollingstation_ID.description"
+                            caption="Station"
                             alignment="center"
                             cssClass="myClass"
                             sortOrder="asc">
-                          </dxi-column> -->
+                          </dxi-column>
                           <dxi-column 
                             [width]="100" 
-                            dataField="election_ID"
-                            caption="Election ID"
+                            dataField="assignedvoters"
+                            caption="Assigned Voters"
                             cssClass="myClass">
                           </dxi-column>
                           <dxi-column 
                             [width]="100" 
-                            dataField="election_DATE"
-                            caption="Election Date"
+                            dataField="areatype_ID.description"
+                            caption="Area"
+                            cssClass="myClass">
+                          </dxi-column>
+                          <dxi-column 
+                            [width]="100" 
+                            dataField="pollingstation_ID.contituency_ID.district_ID.district_NAME"
+                            caption="District"
                             cssClass="myClass"
                           ></dxi-column>
 
                           <dxi-column 
-                          [width]="250" 
-                          dataField="election_TYPE.description"
-                          caption=" Election Type"
+                          [width]="110" 
+                          dataField="pollingstation_ID.contituency_ID.contituency_DESC"
+                          caption=" Contituency"
                           cssClass="myClass"
                         ></dxi-column>
 
-                          <!-- <dxi-column 
-                            dataField="electioning_PATH"
-                            caption="Image"
-                            alignment="center"
-                            cssClass="myClass"
-                          ></dxi-column> -->
-                          <dxi-column 
-                            [width]="100" 
-                            dataField="isactive"
-                            caption="Active"
-                            cssClass="myClass"
-                            alignment="center"
-                          ></dxi-column>
-                          <!-- //Buttons column -->
-                          <dxi-column 
-                          [width]="75" 
-                          [allowFiltering]="false"
-                          [allowSorting]="false" 
-                          alignment="center"
-                          cellTemplate="cellTemplate">
-                        </dxi-column>
-                        <dxi-column 
-                          [width]="75" 
-                          [allowFiltering]="false"
-                          [allowSorting]="false" 
-                          alignment="center"
-                          cellTemplate="cellTemplates">
-                        </dxi-column>
+                          
+                        
                           <div *dxTemplate="let data of 'cellTemplate'">
                             <button class="btn btn-default btn-white btn-rounded btn-sm" (click)="Edit(data)">
                               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </button>
                           </div>
-                          <div *dxTemplate="let data of 'cellTemplates'">
+                          <div *dxTemplate="let data of 'delTemplate'">
                             <button class="btn btn-default btn-white btn-rounded btn-sm" (click)="Delete(data)">
                               <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                           </div>
-                          <!-- <div *dxTemplate="let data of 'cellTemplate'">
-                            
-                          </div> -->
                            <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
                           </dx-data-grid><br>
                         </div>
@@ -131,35 +121,55 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          <i class="fa fa-plus" aria-hidden="true"></i> Add New Election Information 
+          <i class="fa fa-plus" aria-hidden="true"></i> Add New Election Block Code Information 
         </h5>
         <button aria-label="Close" class="close" data-dismiss="modal" type="button">
           <span aria-hidden="true"> ×</span>
         </button>
       </div>
-      <form action="" class="form" (ngSubmit)="f.form.valid && add(electioninformation)" #f="ngForm" novalidate>
+      <form action="" class="form" (ngSubmit)="f.form.valid && add(electioncontituencypollingstationdetailinformation)" #f="ngForm" novalidate>
         <div class="modal-body">
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label class="control-label">Election Date </label>
-                <input type="date" class="form-control" name="Election Date" [(ngModel)]="electioninformation.election_DATE" maxlength="50" >
+                <label class="control-label">Station Name</label>
+                <input type="text" class="form-control" name="title" [(ngModel)]="electioncontituencypollingstationdetailinformation.stationName" maxlength="50" >
               </div>
             </div>
           </div>
-           
+            <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">No of Voters<span style="color:red">*</span></label>
+                <input type="text" class="form-control" name="surname" [(ngModel)]="electioncontituencypollingstationdetailinformation.assignedVoters" maxlength="50" [ngClass]="{'is-invalid' : code.invalid }"  #code="ngModel" pattern="[a-zA-Z0-9\s]+" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group ">
+                <label class="control-label">Area<span style="color:red">*</span></label>
+                <input type="text" class="form-control" name="forenames" [(ngModel)]="electioncontituencypollingstationdetailinformation.area" maxlength="50" [ngClass]="{'is-invalid' : code.invalid }"  #code="ngModel" pattern="[a-zA-Z0-9\s]+" required>
+              </div>
+            </div>   
+          </div>
 
           <div class="row">
           <div class="col-md-12">
             <div class="form-group ">
-              <label class="control-label"> Election Type </label>
-              <ng-select [(ngModel)]="electiontypeActive[0]" name="Election Type">
-                <ng-option  [value]="electiontypeActive[0]">GENERAL</ng-option>
-            </ng-select>
+              <label class="control-label">District</label>
+              <input type="text" class="form-control" name="forenames" [(ngModel)]="electioncontituencypollingstationdetailinformation.district" maxlength="50" [ngClass]="{'is-invalid' : code.invalid }"  #code="ngModel" pattern="[a-zA-Z0-9\s]+" required>
+
             </div>
           </div>
         </div>
-         
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group ">
+                <label class="control-label">Contituency</label>
+                <input type="text" class="form-control" name="electioning_PATH" [(ngModel)]="electioncontituencypollingstationdetailinformation.contituency" maxlength="50"  >
+              </div>
+            </div>
+          </div>
+
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary" [disabled]="f.invalid">
@@ -183,38 +193,36 @@
           <span aria-hidden="true"> ×</span>
         </button>
       </div>
-      <form action="" class="form" (ngSubmit)="f.form.valid && update(electioninformation)" #f="ngForm" novalidate>
+      <form action="" class="form" (ngSubmit)="f.form.valid && update(electioncontituencypollingstationdetailinformation)" #f="ngForm" novalidate>
         <div class="modal-body">
-          <!-- <div class="row">
+          <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label class="control-label">Election Title </label>
-                <input type="text" class="form-control" name="title" [(ngModel)]="electioninformation.title" maxlength="50" >
+                <label class="control-label">Station Name</label>
+                <input type="text" class="form-control" name="title" [(ngModel)]="electioncontituencypollingstationdetailinformation.stationName" maxlength="50" >
               </div>
             </div>
-          </div> -->
-          <!-- <div class="row">
+          </div>
+            <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label class="control-label">Election Surname <span style="color:red">*</span></label>
-                <input type="text" class="form-control" name="surname" [(ngModel)]="electioninformation.surname" maxlength="50" [ngClass]="{'is-invalid' : code.invalid }"  #code="ngModel" pattern="[a-zA-Z0-9\s]+" required>
+                <label class="control-label">No of Voters<span style="color:red">*</span></label>
+                <input type="text" class="form-control" name="surname" [(ngModel)]="electioncontituencypollingstationdetailinformation.assignedVoters" maxlength="50" [ngClass]="{'is-invalid' : code.invalid }"  #code="ngModel" pattern="[a-zA-Z0-9\s]+" required>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group ">
-                <label class="control-label">Election Forename<span style="color:red">*</span></label>
-                <input type="text" class="form-control" name="forenames" [(ngModel)]="electioninformation.forenames" maxlength="50" [ngClass]="{'is-invalid' : code.invalid }"  #code="ngModel" pattern="[a-zA-Z0-9\s]+" required>
+                <label class="control-label">Area<span style="color:red">*</span></label>
+                <input type="text" class="form-control" name="forenames" [(ngModel)]="electioncontituencypollingstationdetailinformation.area" maxlength="50" [ngClass]="{'is-invalid' : code.invalid }"  #code="ngModel" pattern="[a-zA-Z0-9\s]+" required>
               </div>
             </div>   
-          </div> -->
+          </div>
 
           <div class="row">
           <div class="col-md-12">
             <div class="form-group ">
-              <label class="control-label"> Election Type </label>
-              <ng-select [(ngModel)]="electioninformation.election_TYPE" name="election_TYPE">
-                <ng-option *ngFor="let electiontype of electiontypeActive" [value]="1">{{electioninformation.election_TYPE}}</ng-option>
-            </ng-select>
+              <label class="control-label">District</label>
+              <input type="text" class="form-control" name="forenames" [(ngModel)]="electioncontituencypollingstationdetailinformation.district" maxlength="50" [ngClass]="{'is-invalid' : code.invalid }"  #code="ngModel" pattern="[a-zA-Z0-9\s]+" required>
 
             </div>
           </div>
@@ -222,24 +230,12 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group ">
-                <label class="control-label">Electioning Date</label>
-                <input type="date" class="form-control" name="election_DATE" [(ngModel)]="electioninformation.election_DATE" maxlength="50"  >
+                <label class="control-label">Contituency</label>
+                <input type="text" class="form-control" name="electioning_PATH" [(ngModel)]="electioncontituencypollingstationdetailinformation.contituency" maxlength="50"  >
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <div class="checkbox">
-                  <label class="control-label">
-                    <input type="checkbox" [checked]="electioninformation.isactive" [(ngModel)]="electioninformation.isactive" name="isactive">
-                    Active
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          
+
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary" [disabled]="f.invalid">

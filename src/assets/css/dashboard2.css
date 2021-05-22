@@ -448,7 +448,7 @@ img {
 .list-group-item.active {
     z-index: 2;
     color: #fff;
-    background-color: #323c58 !important;
+    background-color: #32584b !important;
     border-left: 7px solid #6577a7 !important;
 }
 .side-bar ul li.active ::after {

@@ -1,3 +1,6 @@
+import { DistrictinformationService } from './districtinformation/districtinformation.service';
+import { LookupService } from './lookup/lookup.service';
+import { ElectioninformationService } from './electioninformation/electioninformation.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component, enableProdMode } from '@angular/core';
 
@@ -22,6 +25,7 @@ import { LoadingBarHttpModule } from '@ngx-loading-bar/http';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { NgSelectModule } from "@ng-select/ng-select";
 import { LoadingBarModule } from '@ngx-loading-bar/core';
+
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import{
@@ -37,6 +41,7 @@ import{
   DxCheckBoxModule,
   DxSelectBoxModule,
   DxDropDownButtonModule,
+  
 } from 'devextreme-angular';
 import CustomStore from 'devextreme/data/custom_store';
 
@@ -46,6 +51,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
 import { AgGridModule } from "ag-grid-angular";
+import { DxGalleryModule } from "devextreme-angular";
 
 import { HttpErrorInterceptor } from "./services/http-error.interceptor";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
@@ -70,6 +76,16 @@ import { RequestOptionsService } from './services/setting.headers';
 import { LookupComponent } from './lookup/lookup.component';
 import { DriverinformationComponent } from './driverinformation/driverinformation.component';
 import { ElectioninformationComponent } from './electioninformation/electioninformation.component';
+import { ElectionblockcodeinformationComponent } from './electionblockcodeinformation/electionblockcodeinformation.component';
+import { ElectioncontituencyinformationComponent } from './electioncontituencyinformation/electioncontituencyinformation.component';
+import { ElectioncontituencypollingstationinformationComponent } from './electioncontituencypollingstationinformation/electioncontituencypollingstationinformation.component';
+import { ElectioncontituencypollingstationdetailinformationComponent } from './electioncontituencypollingstationdetailinformation/electioncontituencypollingstationdetailinformation.component';
+import { ElectioncontituencypollingstationresultinformationComponent } from './electioncontituencypollingstationresultinformation/electioncontituencypollingstationresultinformation.component';
+import { PoliticalpartyinformationComponent } from './politicalpartyinformation/politicalpartyinformation.component';
+import { PoliticalpartycandidateinformationComponent } from './politicalpartycandidateinformation/politicalpartycandidateinformation.component';
+import { PersoninformationComponent } from './personinformation/personinformation.component';
+import { DistrictinformationComponent } from './districtinformation/districtinformation.component';
+import { ElectionvoterinformationComponent } from './electionvoterinformation/electionvoterinformation.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +107,18 @@ import { ElectioninformationComponent } from './electioninformation/electioninfo
     ViewRendererComponent,
     DriverinformationComponent,
     ElectioninformationComponent,
+    ElectionblockcodeinformationComponent,
+    ElectioncontituencyinformationComponent,
+    ElectioncontituencypollingstationinformationComponent,
+    ElectioncontituencypollingstationdetailinformationComponent,
+    ElectioncontituencypollingstationresultinformationComponent,
+    PoliticalpartyinformationComponent,
+    PoliticalpartycandidateinformationComponent,
+    PersoninformationComponent,
+    DistrictinformationComponent,
+    ElectionvoterinformationComponent,
+
+   
   ],
   imports: [
     BrowserModule,
@@ -120,7 +148,8 @@ import { ElectioninformationComponent } from './electioninformation/electioninfo
     DxButtonModule,
     DxCheckBoxModule,
     DxSelectBoxModule,
-    DxDropDownButtonModule
+    DxDropDownButtonModule,
+    DxGalleryModule
   ],
   providers: [
     {
@@ -137,7 +166,10 @@ import { ElectioninformationComponent } from './electioninformation/electioninfo
     OnFailService,
     CookieService,
     SafePipe,
-    FilterPipe
+    FilterPipe,
+    ElectioninformationService,
+    LookupService,
+    DistrictinformationService,
   ],
   bootstrap: [AppComponent]
 })
